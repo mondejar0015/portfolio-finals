@@ -11,13 +11,20 @@
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f7f7f7;
-            padding-top: 50px;
+            padding-top: 70px;
         }
 
         /* Navbar Styling */
         .navbar {
-            background-color: #007bff;
+            background-color: #1a237e;
             transition: background-color 0.3s ease;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1030;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-brand {
@@ -28,28 +35,28 @@
             align-items: center;
         }
 
-        /* Navbar Logo Styling */
         .navbar-brand img {
             width: 40px;
-            height: 40px; 
-            border-radius: 50%; 
-            margin-right: 10px; 
-            transition: all 0.3s ease; 
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
         }
 
         .navbar-brand img:hover {
-             box-shadow: 0 4px 10px rgba(0, 123, 255, 0.5); 
-            transform: scale(1.1); 
+            box-shadow: 0 4px 10px rgba(26, 35, 126, 0.5);
+            transform: scale(1.1);
+        }
+
+        .navbar-nav {
+            gap: 15px;
         }
 
         .navbar-nav .nav-link {
             color: white !important;
             text-transform: uppercase;
             font-weight: bold;
-        }
-
-        .navbar-nav .nav-link {
-            padding: 10px 20px;
+            padding: 10px 15px;
             transition: color 0.3s ease, text-decoration 0.3s ease;
         }
 
@@ -63,7 +70,6 @@
             border-bottom: 2px solid #ffd700;
         }
 
-        /* Contact Form Section */
         .contact-form-section {
             padding: 50px 0;
             background-color: #ffffff;
@@ -105,11 +111,6 @@
             box-shadow: 0 6px 12px rgba(0, 123, 255, 0.5);
         }
 
-        .contact-form button:active {
-            background-color: #004085;
-            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
-        }
-
         .contact-details p {
             font-size: 1.2rem;
             color: #555;
@@ -124,15 +125,6 @@
             text-decoration: underline;
         }
 
-        .alert {
-            display: none;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
         .footer {
             background-color: #f1f1f1;
             padding: 20px 0;
@@ -143,27 +135,17 @@
         .footer p {
             margin: 0;
         }
-
-        /* Hover effect for form inputs */
-        .form-control:hover {
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
-        }
-
-        /* Smooth transitions for shadows */
-        .form-control,
-        .contact-form button {
-            transition: all 0.3s ease;
-        }
     </style>
 </head>
 
 <body>
-
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="portfolio.html">
-                <img src="logo.png" alt="Logo"></a>
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.png" alt="Logo">
+                Contact Us
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -171,10 +153,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="portfolio.html#portfolio">Portfolio</a>
+                        <a class="nav-link" href="index.html">Portfolio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="portfolio.html#about">About</a>
+                        <a class="nav-link" href="index.html#about">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="skills.html">Skills</a>
@@ -194,10 +176,10 @@
             <p class="text-center mb-5">Feel free to get in touch with me using the form below!</p>
 
             <!-- Success or Error message -->
-            <div id="responseMessage" class="alert alert-success" role="alert">
+            <div id="responseMessage" class="alert alert-success" role="alert" style="display: none;">
                 Your message has been sent successfully!
             </div>
-            <div id="errorMessage" class="alert alert-danger" role="alert">
+            <div id="errorMessage" class="alert alert-danger" role="alert" style="display: none;">
                 Something went wrong. Please try again.
             </div>
 
@@ -239,25 +221,20 @@
     <!-- EmailJS Script -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
     <script>
-        // Initialize EmailJS with your user ID
         (function () {
-            emailjs.init("mRIYsGt5vGO_Tud1H");  // Your EmailJS user ID
+            emailjs.init("mRIYsGt5vGO_Tud1H");
         })();
 
-        // Function to send email using EmailJS
         document.getElementById("contact-form").addEventListener("submit", function (event) {
             event.preventDefault();
 
-            // Send the form data using EmailJS
             emailjs.sendForm("service_fitdz5i", "template_v53q9bi", this).then(
                 function (response) {
-                    // Show success message
                     document.getElementById('responseMessage').style.display = 'block';
                     document.getElementById('errorMessage').style.display = 'none';
                     document.getElementById('contact-form').reset();
                 },
                 function (error) {
-                    // Show error message
                     document.getElementById('errorMessage').style.display = 'block';
                     document.getElementById('responseMessage').style.display = 'none';
                     console.log("Failed to send the message:", error);
